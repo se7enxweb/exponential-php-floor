@@ -26,6 +26,7 @@ by hand.
 |---------|---------------|------------------|
 | 1.0.0   | 7.4 (without support) | Superseded by 1.0.1: it also required sevenx_dse ~1.1.14 and xrowextract ~2.5.18, whose code does not run on PHP 7.4 (the 7.4 boot check found it after the release). |
 | 1.0.1   | 7.4 (without support) | The last PHP 7.4 releases of the lines that moved to PHP 8.0 a few days later: bccie ~1.1.18, cjw_newsletter ~4.2.14, eztags ~2.4.23, git_manager ~2.0.22, syndication ~1.3.10, and google/recaptcha ~1.2.4 (the 1.x line that still runs on PHP 7.4). xrowextract and sevenx_dse are left out on PHP 7.4. |
+| 1.0.2   | 7.4 (without support) | The set of 1.0.1, plus ezodf ~7.0.4 (Exponential activates ezodf; without it a PHP 7.4 installation logged "Extension 'ezodf' does not exist"), and eztags ~2.4.31. Both releases install on PHP 7.4 again. |
 | 1.1.0   | 8.0           | The extensions that need PHP 8.0, at the versions the kernel asks for: Exponential Velocity, two-factor authentication, sqliimport, expqueue, ezodf, exp_adminui, expai, the CJW theme packages and the rest, and google/recaptcha ~1.3.1. Not the Layouts family, which needs PHP 8.1. |
 | 1.2.0   | 8.1 to 8.3    | Everything of 1.1.0, plus the Netgen Layouts port (explayouts and its packages), the expsite packages and the media site theme (sevenx-themes-media). google/recaptcha ~1.3.1, because 1.4 and later need PHP 8.4. |
 | 1.3.0   | 8.4 and later | The same set as 1.2.0 with no limit on google/recaptcha, so the current 2.x line is installed. PHP 8.5 included. |
@@ -35,9 +36,9 @@ by hand.
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
 PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
-(1.0.1 rather than 1.0.0 on PHP 7.4). The kernel names the lowest patch release of each line it
-accepts, `~1.0.1 || ~1.1.1 || ~1.2.1 || ~1.3.1`, so a version that would allow older extension
-releases than the kernel asks for (1.0.0, 1.1.0, 1.2.0, 1.3.0) is never installed.
+(1.0.2 rather than 1.0.1 or 1.0.0 on PHP 7.4). The kernel names the lowest patch release of each line it
+accepts, `~1.0.2 || ~1.1.1 || ~1.2.1 || ~1.3.1`, so a version that would allow older extension
+releases than the kernel asks for (1.0.0, 1.0.1, 1.1.0, 1.2.0, 1.3.0) is never installed.
 
 ## What is not available on PHP 7.4
 
@@ -47,10 +48,10 @@ On PHP 7.4 Composer leaves out what cannot run there, and the kernel says so ins
   refuses with a message on 7.4; Apache or nginx with PHP-FPM, and the built-in `php`
   engine, work as before.
 - **Netgen Layouts** (explayouts), the expsite packages and the media site theme need PHP 8.1.
-- Two-factor authentication, sqliimport 2.x, expqueue, ezodf 7.x, exp_adminui,
+- Two-factor authentication, sqliimport 2.x, expqueue, exp_adminui,
   exp_enhanced_link, expai, expchangeclass, ezownerchange 1.4 and the CJW theme packages
   declare PHP 8.0 and are not installed on PHP 7.4. xrowextract and sevenx_dse do not run on
-  PHP 7.4 and are left out by 1.0.1.
+  PHP 7.4 and are left out by 1.0.1 and later. ezodf is installed on PHP 7.4 from 1.0.2 (ezodf 7.0.4).
 
 ## Maintaining it
 
