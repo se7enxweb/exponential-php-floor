@@ -33,12 +33,13 @@ by hand.
 | 1.1.1   | 8.0           | The set of 1.1.0 at the extension releases of 29 October 2026, the ones the kernel required itself before it required this metapackage (Exponential Velocity ~0.0.4.57, eztags ~2.4.29, cjw_newsletter ~4.2.19, exp_adminui ~1.0.0.54 ...). 1.1.0 allowed older releases. |
 | 1.2.1   | 8.1 to 8.3    | The set of 1.2.0 at the same releases as 1.1.1, plus explayouts ~1.4.46, explayouts-ui ~1.3.31, explayouts-ui-api ~1.3.34 and sevenx-themes-media ~1.5.80. |
 | 1.3.1   | 8.4 and later | The set of 1.3.0 at the same releases as 1.2.1. |
+| 1.1.2, 1.2.2, 1.3.2 | 8.0; 8.1 to 8.3; 8.4 and later | The sets of 1.1.1, 1.2.1 and 1.3.1 with exp_adminui ~1.0.0.55 (the release whose footer links Exponential to exponential.earth), as the kernel requires since 29 October 2026. |
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
 PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
 (1.0.2 rather than 1.0.1 or 1.0.0 on PHP 7.4). The kernel names the lowest patch release of each line it
-accepts, `~1.0.2 || ~1.1.1 || ~1.2.1 || ~1.3.1`, so a version that would allow older extension
-releases than the kernel asks for (1.0.0, 1.0.1, 1.1.0, 1.2.0, 1.3.0) is never installed.
+accepts, `~1.0.2 || ~1.1.2 || ~1.2.2 || ~1.3.2`, so a version that would allow older extension
+releases than the kernel asks for (1.0.0, 1.0.1, 1.1.0, 1.1.1, 1.2.0, 1.2.1, 1.3.0, 1.3.1) is never installed.
 
 ## What is not available on PHP 7.4
 
