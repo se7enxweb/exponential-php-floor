@@ -29,10 +29,15 @@ by hand.
 | 1.1.0   | 8.0           | The extensions that need PHP 8.0, at the versions the kernel asks for: Exponential Velocity, two-factor authentication, sqliimport, expqueue, ezodf, exp_adminui, expai, the CJW theme packages and the rest, and google/recaptcha ~1.3.1. Not the Layouts family, which needs PHP 8.1. |
 | 1.2.0   | 8.1 to 8.3    | Everything of 1.1.0, plus the Netgen Layouts port (explayouts and its packages), the expsite packages and the media site theme (sevenx-themes-media). google/recaptcha ~1.3.1, because 1.4 and later need PHP 8.4. |
 | 1.3.0   | 8.4 and later | The same set as 1.2.0 with no limit on google/recaptcha, so the current 2.x line is installed. PHP 8.5 included. |
+| 1.1.1   | 8.0           | The set of 1.1.0 at the extension releases of 29 October 2026, the ones the kernel required itself before it required this metapackage (Exponential Velocity ~0.0.4.57, eztags ~2.4.29, cjw_newsletter ~4.2.19, exp_adminui ~1.0.0.54 ...). 1.1.0 allowed older releases. |
+| 1.2.1   | 8.1 to 8.3    | The set of 1.2.0 at the same releases as 1.1.1, plus explayouts ~1.4.46, explayouts-ui ~1.3.31, explayouts-ui-api ~1.3.34 and sevenx-themes-media ~1.5.80. |
+| 1.3.1   | 8.4 and later | The set of 1.3.0 at the same releases as 1.2.1. |
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
-PHP floor. The kernel's `^1.0` accepts all of them, and Composer installs the highest one whose
-`php` requirement the running PHP meets (1.0.1 rather than 1.0.0 on PHP 7.4).
+PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
+(1.0.1 rather than 1.0.0 on PHP 7.4). The kernel names the lowest patch release of each line it
+accepts, `~1.0.1 || ~1.1.1 || ~1.2.1 || ~1.3.1`, so a version that would allow older extension
+releases than the kernel asks for (1.0.0, 1.1.0, 1.2.0, 1.3.0) is never installed.
 
 ## What is not available on PHP 7.4
 
