@@ -34,12 +34,25 @@ by hand.
 | 1.2.1   | 8.1 to 8.3    | The set of 1.2.0 at the same releases as 1.1.1, plus explayouts ~1.4.46, explayouts-ui ~1.3.31, explayouts-ui-api ~1.3.34 and sevenx-themes-media ~1.5.80. |
 | 1.3.1   | 8.4 and later | The set of 1.3.0 at the same releases as 1.2.1. |
 | 1.1.2, 1.2.2, 1.3.2 | 8.0; 8.1 to 8.3; 8.4 and later | The sets of 1.1.1, 1.2.1 and 1.3.1 with exp_adminui ~1.0.0.55 (the release whose footer links Exponential to exponential.earth), as the kernel requires since 29 October 2026. |
+| 1.0.3   | 7.4 (without support) | The set of 1.0.2, plus Twig for the kernel's Twig template engine: se7enxweb/twig ~3.11.4, which runs on PHP 7.4. |
+| 1.1.3   | 8.0           | The set of 1.1.2, plus se7enxweb/twig ~3.19.1, which runs on PHP 8.0. |
+| 1.2.3, 1.3.3 | 8.1 to 8.3; 8.4 and later | The sets of 1.2.2 and 1.3.2, plus twig/twig ^3.27, the upstream releases that no security advisory affects. |
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
 PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
-(1.0.2 rather than 1.0.1 or 1.0.0 on PHP 7.4). The kernel names the lowest patch release of each line it
-accepts, `~1.0.2 || ~1.1.2 || ~1.2.2 || ~1.3.2`, so a version that would allow older extension
-releases than the kernel asks for (1.0.0, 1.0.1, 1.1.0, 1.1.1, 1.2.0, 1.2.1, 1.3.0, 1.3.1) is never installed.
+(1.0.3 rather than 1.0.2, 1.0.1 or 1.0.0 on PHP 7.4). The kernel names the lowest patch release of each line it
+accepts, `~1.0.3 || ~1.1.3 || ~1.2.3 || ~1.3.3`, so a version that would allow older extension
+releases than the kernel asks for, or leave out Twig (1.0.0 to 1.0.2, 1.1.0 to 1.1.2, 1.2.0 to 1.2.2, 1.3.0 to 1.3.2), is never installed.
+
+### Twig
+
+Since 1.0.3, 1.1.3, 1.2.3 and 1.3.3 the metapackage, not the kernel, requires Twig, because no
+single Twig requirement installs on every PHP version with Composer's security blocking on:
+upstream twig/twig up to 3.26 is affected by security advisories, and 3.27 and later need PHP 8.1.
+On PHP 8.1 and later the metapackage requires twig/twig ^3.27. On PHP 7.4 and 8.0 it requires
+se7enxweb/twig, the maintained Twig 3 line for those PHP versions, which provides the same
+`Twig\` classes. The kernel itself must not require twig/twig: se7enxweb/twig replaces twig/twig,
+so a twig/twig requirement would make Composer apply the twig/twig advisories to it.
 
 ## What is not available on PHP 7.4
 
