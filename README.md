@@ -38,6 +38,7 @@ by hand.
 | 1.1.3   | 8.0           | The set of 1.1.2, plus se7enxweb/twig ~3.19.1, which runs on PHP 8.0. |
 | 1.2.3, 1.3.3 | 8.1 to 8.3; 8.4 and later | The sets of 1.2.2 and 1.3.2, plus twig/twig ^3.27, the upstream releases that no security advisory affects. |
 | 1.1.4   | 8.0           | The set of 1.1.3, plus Exponential Layouts (explayouts and its eleven packages), expquery-translator, the five expsite packages and the media site theme (sevenx-themes-media), at the releases 1.2.3 requires. Exponential supports PHP 8.0 with all of its extensions; 1.1.0 to 1.1.3 left these 19 packages out although they run on PHP 8.0. |
+| 1.1.5, 1.2.4, 1.3.4 | 8.0; 8.1 to 8.3; 8.4 and later | The same packages as 1.1.4, 1.2.3 and 1.3.3. Those tags were made before this README was corrected and still show its old text (that Layouts needed PHP 8.1); these versions carry the corrected README. |
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
 PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
