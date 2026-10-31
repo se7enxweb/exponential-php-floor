@@ -39,6 +39,7 @@ by hand.
 | 1.2.3, 1.3.3 | 8.1 to 8.3; 8.4 and later | The sets of 1.2.2 and 1.3.2, plus twig/twig ^3.27, the upstream releases that no security advisory affects. |
 | 1.1.4   | 8.0           | The set of 1.1.3, plus Exponential Layouts (explayouts and its eleven packages), expquery-translator, the five expsite packages and the media site theme (sevenx-themes-media), at the releases 1.2.3 requires. Exponential supports PHP 8.0 with all of its extensions; 1.1.0 to 1.1.3 left these 19 packages out although they run on PHP 8.0. |
 | 1.0.4, 1.1.5, 1.2.4, 1.3.4 | 7.4 (without support); 8.0; 8.1 to 8.3; 8.4 and later | The same packages as 1.0.3, 1.1.4, 1.2.3 and 1.3.3. Those tags were made before this README was corrected and still show its old text (that Layouts needed PHP 8.1); these versions carry the corrected README. |
+| 1.2.5, 1.3.5 | 8.1 to 8.3; 8.4 and later | The sets of 1.2.4 and 1.3.4 with `twig/twig` `^3.27 \|\| ~3.19.1`: a platform that pins se7enxweb/twig 3.19.1 on every PHP version (Exponential Platform Legacy 3.x, and 4.6.x on PHP 8.4 and later) installs the kernel's current code again. 1.2.3, 1.2.4, 1.3.3 and 1.3.4 required `twig/twig` `^3.27` only, which se7enxweb/twig 3.19.1 cannot meet, so Composer fell back to the kernel release v6.0.14 on PHP 8.1 to 8.3 and found nothing on 8.4 and later. On its own the floor still installs `twig/twig` 3.27 or later. 1.0.x and 1.1.x needed no change. |
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
 PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
@@ -55,6 +56,28 @@ On PHP 8.1 and later the metapackage requires twig/twig ^3.27. On PHP 7.4 and 8.
 se7enxweb/twig, the maintained Twig 3 line for those PHP versions, which provides the same
 `Twig\` classes. The kernel itself must not require twig/twig: se7enxweb/twig replaces twig/twig,
 so a twig/twig requirement would make Composer apply the twig/twig advisories to it.
+
+Since 1.2.5 and 1.3.5 the requirement on PHP 8.1 and later is `twig/twig` `^3.27 || ~3.19.1`. A project
+that requires se7enxweb/twig 3.19.1 itself (Exponential Platform Legacy 3.x does on every PHP version,
+4.6.x allows it) meets it through the fork, which replaces twig/twig 3.19.1; nothing else can, because
+upstream twig/twig 3.19 is blocked by its security advisories. Without such a project Composer still
+chooses `twig/twig` 3.27 or later, the highest release that matches.
+
+### GraphQL
+
+The metapackage does not require `webonyx/graphql-php`, on any PHP range, although the kernel's GraphQL
+API runs on it (version 15, `^15.32.3`). The platforms the kernel is installed into bring a GraphQL
+library of their own for their GraphQL bundle, which cannot be installed next to `webonyx/graphql-php`
+15: Exponential Platform Legacy 3.x installs `ibexa/graphql-php` 0.13 on every PHP version from 8.0, and
+4.6.x on PHP 7.4 installs `se7enxweb/graphql-php` 14.11. Both replace `webonyx/graphql-php`. Checked with
+Composer 2.10.3, security blocking on, on 31 October 2026: with `webonyx/graphql-php` `^15.32.3` added to
+this metapackage, 4.6.x on PHP 7.4 and 3.x on PHP 8.0 and 8.1 could not be resolved.
+
+The kernel lists the library under `suggest` and `require-dev` instead: the kernel installed on its own
+(`composer create-project`, or `composer install` in a checkout) installs it on every PHP version from
+7.4 to 8.5, 4.6.x on PHP 8.0 and later and 5.x install version 15 themselves, and anywhere else
+`composer require webonyx/graphql-php:^15.32.3` adds it. Without it, or with a platform's 0.13 or 14,
+only the kernel's GraphQL API is unavailable, and says why (`./console exp:graphql:status`).
 
 ## What is not available on PHP 7.4
 
