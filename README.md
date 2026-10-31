@@ -40,6 +40,7 @@ by hand.
 | 1.1.4   | 8.0           | The set of 1.1.3, plus Exponential Layouts (explayouts and its eleven packages), expquery-translator, the five expsite packages and the media site theme (sevenx-themes-media), at the releases 1.2.3 requires. Exponential supports PHP 8.0 with all of its extensions; 1.1.0 to 1.1.3 left these 19 packages out although they run on PHP 8.0. |
 | 1.0.4, 1.1.5, 1.2.4, 1.3.4 | 7.4 (without support); 8.0; 8.1 to 8.3; 8.4 and later | The same packages as 1.0.3, 1.1.4, 1.2.3 and 1.3.3. Those tags were made before this README was corrected and still show its old text (that Layouts needed PHP 8.1); these versions carry the corrected README. |
 | 1.2.5, 1.3.5 | 8.1 to 8.3; 8.4 and later | The sets of 1.2.4 and 1.3.4 with `twig/twig` `^3.27 \|\| ~3.19.1`: a platform that pins se7enxweb/twig 3.19.1 on every PHP version (Exponential Platform Legacy 3.x, and 4.6.x on PHP 8.4 and later) installs the kernel's current code again. 1.2.3, 1.2.4, 1.3.3 and 1.3.4 required `twig/twig` `^3.27` only, which se7enxweb/twig 3.19.1 cannot meet, so Composer fell back to the kernel release v6.0.14 on PHP 8.1 to 8.3 and found nothing on 8.4 and later. On its own the floor still installs `twig/twig` 3.27 or later. 1.0.x and 1.1.x needed no change. |
+| 1.0.5, 1.1.6, 1.2.6, 1.3.6 | 7.4 (without support); 8.0; 8.1 to 8.3; 8.4 and later | The sets of 1.0.4, 1.1.5, 1.2.5 and 1.3.5, and Twig 2.16.5 is accepted next to Twig 3: se7enxweb/twig `~2.16.5 \|\| ~3.11.4` (7.4), `~2.16.5 \|\| ~3.19.1` (8.0), twig/twig `^2.16.5 \|\| ^3.27 \|\| ~3.19.1` (8.1 and later, where se7enxweb/twig 2.16.5 replaces twig/twig 2.16.5). Exponential Platform Legacy 2.5, Exponential Platform Nexus 2.5 and Exponential Platform Nexus CJW run on Symfony 3.4 and Twig 2; with the Twig 3 requirement of the earlier versions they could not install a kernel that needs this metapackage. |
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
 PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
@@ -62,6 +63,13 @@ that requires se7enxweb/twig 3.19.1 itself (Exponential Platform Legacy 3.x does
 4.6.x allows it) meets it through the fork, which replaces twig/twig 3.19.1; nothing else can, because
 upstream twig/twig 3.19 is blocked by its security advisories. Without such a project Composer still
 chooses `twig/twig` 3.27 or later, the highest release that matches.
+
+Since 1.0.5, 1.1.6, 1.2.6 and 1.3.6 every range also accepts Twig 2.16.5, the se7enxweb/twig release with the
+2026 security fixes backported to the 2.x line. The 2.5 platforms (Symfony 3.4) require se7enxweb/twig ^2.16.5
+themselves; Composer then installs Twig 2 for them and still chooses Twig 3 everywhere else, because it takes
+the highest release the other requirements allow. The kernel's Twig template engine (`.twig` templates) needs
+Twig 3.15 or later: with an older Twig the kernel switches that engine off and logs why, and the `.tpl` and
+`.stpl` engines work as before.
 
 ### GraphQL
 
