@@ -27,8 +27,8 @@ by hand.
 | 1.0.0   | 7.4 (without support) | Superseded by 1.0.1: it also required sevenx_dse ~1.1.14 and xrowextract ~2.5.18, whose code does not run on PHP 7.4 (the 7.4 boot check found it after the release). |
 | 1.0.1   | 7.4 (without support) | The last PHP 7.4 releases of the lines that moved to PHP 8.0 a few days later: bccie ~1.1.18, cjw_newsletter ~4.2.14, eztags ~2.4.23, git_manager ~2.0.22, syndication ~1.3.10, and google/recaptcha ~1.2.4 (the 1.x line that still runs on PHP 7.4). xrowextract and sevenx_dse are left out on PHP 7.4. |
 | 1.0.2   | 7.4 (without support) | The set of 1.0.1, plus ezodf ~7.0.4 (Exponential activates ezodf; without it a PHP 7.4 installation logged "Extension 'ezodf' does not exist"), and eztags ~2.4.31. Both releases install on PHP 7.4 again. |
-| 1.1.0   | 8.0           | The extensions that need PHP 8.0, at the versions the kernel asks for: Exponential Velocity, two-factor authentication, sqliimport, expqueue, ezodf, exp_adminui, expai, the CJW theme packages and the rest, and google/recaptcha ~1.3.1. Not the Layouts family, which needs PHP 8.1. |
-| 1.2.0   | 8.1 to 8.3    | Everything of 1.1.0, plus the Netgen Layouts port (explayouts and its packages), the expsite packages and the media site theme (sevenx-themes-media). google/recaptcha ~1.3.1, because 1.4 and later need PHP 8.4. |
+| 1.1.0   | 8.0           | The extensions that need PHP 8.0, at the versions the kernel asks for: Exponential Velocity, two-factor authentication, sqliimport, expqueue, ezodf, exp_adminui, expai, the CJW theme packages and the rest, and google/recaptcha ~1.3.1. It left out Exponential Layouts, the expsite packages and the media site theme, which run on PHP 8.0; 1.1.4 corrects that. |
+| 1.2.0   | 8.1 to 8.3    | Everything of 1.1.0, plus Exponential Layouts (explayouts and its packages), the expsite packages and the media site theme (sevenx-themes-media). google/recaptcha ~1.3.1, because 1.4 and later need PHP 8.4. |
 | 1.3.0   | 8.4 and later | The same set as 1.2.0 with no limit on google/recaptcha, so the current 2.x line is installed. PHP 8.5 included. |
 | 1.1.1   | 8.0           | The set of 1.1.0 at the extension releases of 29 October 2026, the ones the kernel required itself before it required this metapackage (Exponential Velocity ~0.0.4.57, eztags ~2.4.29, cjw_newsletter ~4.2.19, exp_adminui ~1.0.0.54 ...). 1.1.0 allowed older releases. |
 | 1.2.1   | 8.1 to 8.3    | The set of 1.2.0 at the same releases as 1.1.1, plus explayouts ~1.4.46, explayouts-ui ~1.3.31, explayouts-ui-api ~1.3.34 and sevenx-themes-media ~1.5.80. |
@@ -37,12 +37,13 @@ by hand.
 | 1.0.3   | 7.4 (without support) | The set of 1.0.2, plus Twig for the kernel's Twig template engine: se7enxweb/twig ~3.11.4, which runs on PHP 7.4. |
 | 1.1.3   | 8.0           | The set of 1.1.2, plus se7enxweb/twig ~3.19.1, which runs on PHP 8.0. |
 | 1.2.3, 1.3.3 | 8.1 to 8.3; 8.4 and later | The sets of 1.2.2 and 1.3.2, plus twig/twig ^3.27, the upstream releases that no security advisory affects. |
+| 1.1.4   | 8.0           | The set of 1.1.3, plus Exponential Layouts (explayouts and its eleven packages), expquery-translator, the five expsite packages and the media site theme (sevenx-themes-media), at the releases 1.2.3 requires. Exponential supports PHP 8.0 with all of its extensions; 1.1.0 to 1.1.3 left these 19 packages out although they run on PHP 8.0. |
 
 The numbers are chosen to read in PHP order: a higher minor version always means a higher
 PHP floor. Composer installs the highest version whose `php` requirement the running PHP meets
 (1.0.3 rather than 1.0.2, 1.0.1 or 1.0.0 on PHP 7.4). The kernel names the lowest patch release of each line it
-accepts, `~1.0.3 || ~1.1.3 || ~1.2.3 || ~1.3.3`, so a version that would allow older extension
-releases than the kernel asks for, or leave out Twig (1.0.0 to 1.0.2, 1.1.0 to 1.1.2, 1.2.0 to 1.2.2, 1.3.0 to 1.3.2), is never installed.
+accepts, `~1.0.3 || ~1.1.4 || ~1.2.3 || ~1.3.3`, so a version that would allow older extension
+releases than the kernel asks for, or leave out Twig (1.0.0 to 1.0.2, 1.1.0 to 1.1.2, 1.2.0 to 1.2.2, 1.3.0 to 1.3.2), or leave out Exponential Layouts on PHP 8.0 (1.1.0 to 1.1.3), is never installed.
 
 ### Twig
 
@@ -61,7 +62,7 @@ On PHP 7.4 Composer leaves out what cannot run there, and the kernel says so ins
 - **Exponential Velocity** (the application server) needs PHP 8.0. `exp:velocity start`
   refuses with a message on 7.4; Apache or nginx with PHP-FPM, and the built-in `php`
   engine, work as before.
-- **Netgen Layouts** (explayouts), the expsite packages and the media site theme need PHP 8.1.
+- **Exponential Layouts** (explayouts), the expsite packages and the media site theme need PHP 8.0.
 - Two-factor authentication, sqliimport 2.x, expqueue, exp_adminui,
   exp_enhanced_link, expai, expchangeclass, ezownerchange 1.4 and the CJW theme packages
   declare PHP 8.0 and are not installed on PHP 7.4. xrowextract and sevenx_dse do not run on
